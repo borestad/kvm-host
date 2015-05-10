@@ -1,2 +1,4 @@
 # kvm-host
-Custom minimal kvm/debian host with tons of awesomness
+My custom "lightweigh" kvm/debian host with tons of awesomness
+
+
