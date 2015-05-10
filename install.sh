@@ -84,7 +84,7 @@ wget http://www.webmin.com/jcameron-key.asc
 apt-key add jcameron-key.asc
 
 aptitude update
-aptitude install webmin
+aptitude -y install webmin
 
 # hr; echo "Web terminal"; hr
 
