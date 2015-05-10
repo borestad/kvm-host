@@ -3,12 +3,13 @@
 # Update & cleanup
 apt-get update
 
-curl https://raw.githubusercontent.com/LuRsT/hr/master/hr > /usr/local/bin/hr
-chmod +x /usr/local/bin/hr
-
 hr; echo "Cleanup and install deps"; hr
 rm -rfv /tmp/bootstrap
 apt-get install curl
+
+curl https://raw.githubusercontent.com/LuRsT/hr/master/hr > /usr/local/bin/hr
+chmod +x /usr/local/bin/hr
+
 
 # sh -c "echo 'LC_ALL=en_US.UTF-8\nLANG=en_US.UTF-8' >> /etc/environment"
 
