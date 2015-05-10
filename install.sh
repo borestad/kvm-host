@@ -3,7 +3,6 @@
 # Update & cleanup
 apt-get update
 
-hr; echo "Cleanup and install deps"; hr
 rm -rfv /tmp/bootstrap
 apt-get install curl
 
