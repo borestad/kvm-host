@@ -112,7 +112,9 @@ hr; echo "Remove translations"; hr
 # http://oneofmanyworlds.blogspot.se/2012/02/debian-wheezy-removing-unused-locales.html
 
 hr; echo "Disable unneded services"; hr
+systemctl stop bluetooth
 systemctl disable bluetooth
+systemctl stop ModemManager
 systemctl disable ModemManager
 
 hr; echo "Reboot for effect"; hr
