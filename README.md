@@ -2,7 +2,7 @@
 My custom "lightweight" kvm/debian host with tons of cli/ncurses awesomness
 
 # Installation (run as root)
-wget --no-cache -O- https://raw.githubusercontent.com/borestad/kvm-host/master/bootstrap.sh | /bin/bash
+apt-get install ca-certificates && wget --no-cache -O- https://raw.githubusercontent.com/borestad/kvm-host/master/bootstrap.sh | /bin/bash
 
 This should result in a fancy hybrid KVM host ~ 1.5GB of disk space and minimal resources (~110 Mb RAM)
 
