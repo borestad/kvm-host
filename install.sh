@@ -86,6 +86,7 @@ apt-key add jcameron-key.asc
 aptitude update
 aptitude install webmin
 
+# hr; echo "Web terminal"; hr
 
 hr; echo "Cleanup apt packages"; hr
 apt-get clean
