@@ -24,11 +24,9 @@ function confirmExit () {
   esac
 }
 
-alias confirm="confirmContinue"
-alias confirm!="confirmExit"
 
-echo "Run this installation script as root ('su' or 'su root' or 'sudo su')" && confirm!
-echo "\nAre you sure?" && confirm!
+echo "Run this installation script as root ('su' or 'su root' or 'sudo su')" && confirmExit
+echo "\nAre you sure?" && confirmExit
 
 # Update & cleanup
 apt-get update
@@ -150,12 +148,12 @@ systemctl disable ModemManager
 
 
 echo "Install a minimal XFCE Desktop?"
-confirm && apt-get install --no-install-recommends \
+confirmContinue && apt-get install --no-install-recommends \
 xorg xfce4 slim alsa-base alsa-utils \
 hal gamin dbus-x11 sudo xdg-utils
 
 
-confirm && apt-get install --no-install-recommends \
+confirmContinue && apt-get install --no-install-recommends \
 desktop-base gnome-icon-theme dmz-cursor-theme \
 xfce4-terminal xfce4-taskmanager xfce4-screenshooter-plugin \
 thunar-archive-plugin thunar-media-tags-plugin
