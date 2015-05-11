@@ -155,15 +155,15 @@ systemctl disable ModemManager
 # dpkg-query -Wf '${Package;-40}${Essential} | ${Priority}\n'
 
 
-echo "Install a minimal XFCE Desktop?"
-confirmContinue && apt-get install --no-install-recommends \
-xorg xfce4 slim alsa-base alsa-utils \
-hal gamin dbus-x11 sudo xdg-utils
+# echo "Install a minimal XFCE Desktop?"
+# confirmContinue && apt-get install --no-install-recommends \
+# xorg  slim alsa-base alsa-utils \
+# hal gamin dbus-x11 sudo xdg-utils
 
 
-confirmContinue && apt-get install --no-install-recommends \
-desktop-base gnome-icon-theme dmz-cursor-theme \
-xfce4-terminal xfce4-taskmanager xfce4-screenshooter-plugin \
-thunar-archive-plugin thunar-media-tags-plugin
+# confirmContinue && apt-get install --no-install-recommends \
+# desktop-base gnome-icon-theme dmz-cursor-theme \
+# xfce4-terminal xfce4-taskmanager xfce4-screenshooter-plugin \
+# thunar-archive-plugin thunar-media-tags-plugin
 
 hr; echo "\nReboot for effect\n"; hr
