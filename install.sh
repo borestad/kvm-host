@@ -144,4 +144,8 @@ systemctl disable bluetooth
 systemctl stop ModemManager
 systemctl disable ModemManager
 
+# Stripped down gist
+# https://gist.github.com/dcloud9/8918580
+# dpkg-query -Wf '${Package;-40}${Essential} | ${Priority}\n'
+
 hr; echo "\nReboot for effect\n"; hr
