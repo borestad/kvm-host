@@ -1,5 +1,11 @@
 #!/bin/bash -e
 
+# Fix locale issues
+update-locale LC_ALL="en_US.UTF-8"
+
+# Temporary fix to avoid logging in
+export LC_ALL="en_US.UTF-8"
+
 function confirmContinue () {
   read -r -p "${1:-Are you sure? [y/N]} " response
   case $response in
