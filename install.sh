@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 function confirmContinue () {
   read -r -p "${1:-Are you sure? [y/N]} " response
@@ -147,5 +147,17 @@ systemctl disable ModemManager
 # Stripped down gist
 # https://gist.github.com/dcloud9/8918580
 # dpkg-query -Wf '${Package;-40}${Essential} | ${Priority}\n'
+
+
+echo "Install a minimal XFCE Desktop?"
+confirm && apt-get install --no-install-recommends \
+xorg xfce4 slim alsa-base alsa-utils \
+hal gamin dbus-x11 sudo xdg-utils
+
+
+confirm && apt-get install --no-install-recommends \
+desktop-base gnome-icon-theme dmz-cursor-theme \
+xfce4-terminal xfce4-taskmanager xfce4-screenshooter-plugin \
+thunar-archive-plugin thunar-media-tags-plugin
 
 hr; echo "\nReboot for effect\n"; hr
