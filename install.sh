@@ -1,5 +1,35 @@
 #!/bin/sh -e
 
+function confirmContinue () {
+  read -r -p "${1:-Are you sure? [y/N]} " response
+  case $response in
+    [yY][eE][sS]|[yY])
+      true
+      ;;
+    *)
+      false
+      ;;
+  esac
+}
+
+function confirmExit () {
+  read -r -p "${1:-Continue? [ y/N ]} " response
+  case $response in
+    [yY][eE][sS]|[yY])
+      true
+      ;;
+    *)
+      exit
+      ;;
+  esac
+}
+
+alias confirm="confirmContinue"
+alias confirm!="confirmExit"
+
+echo "Run this installation script as root ('su' or 'su root' or 'sudo su')" && confirm!
+echo "\nAre you sure?" && confirm!
+
 # Update & cleanup
 apt-get update
 
@@ -10,16 +40,14 @@ curl https://raw.githubusercontent.com/LuRsT/hr/master/hr > /usr/local/bin/hr
 chmod +x /usr/local/bin/hr
 
 
-# sh -c "echo 'LC_ALL=en_US.UTF-8\nLANG=en_US.UTF-8' >> /etc/environment"
+sh -c "echo 'LC_ALL=en_US.UTF-8\nLANG=en_US.UTF-8' >> /etc/environment"
 
-# As root (su)
-
-hr; echo "Installing global system tools"; hr
+hr; echo "\nInstalling global system tools\n"; hr
 apt-get -y install aptitude
 aptitude update
-aptitude -y install sudo htop bash-completion ncdu mc network-manager
+aptitude -y install sudo htop bash-completion ncdu mc network-manager silversearcher-ag
 
-hr; echo "Install dfc"; hr
+hr; echo "\nInstall dfc\n"; hr
 aptitude -y install cmake gettext
 mkdir -p /tmp/bootstrap/dfc && cd /tmp/bootstrap/dfc
 wget http://projects.gw-computing.net/attachments/download/467/dfc-3.0.5.tar.gz
@@ -33,7 +61,7 @@ make install
 rm -rf /tmp/dfc
 # aptitude -y purge cmake gettext
 
-hr; echo "Install cdu"; hr
+hr; echo "\nInstall cdu\n"; hr
 mkdir -p /tmp/bootstrap/cdu && cd /tmp/bootstrap/cdu
 wget http://arsunik.free.fr/pkg/cdu-0.37.tar.gz
 tar xvf cdu-0.37.tar.gz
@@ -41,7 +69,7 @@ cd cdu-0.37
 make install
 rm -rf /tmp/cdu
 
-hr; echo "Installing node"; hr
+hr; echo "\nInstalling node\n"; hr
 cd /
 curl -sL https://deb.nodesource.com/setup_0.12 | bash -
 cd /
@@ -49,26 +77,26 @@ apt-get -y install nodejs
 npm install -g npm
 
 
-hr; echo "Installing more awesome sysadmin tools"; hr
+hr; echo "\nInstalling more awesome sysadmin tools\n"; hr
 npm install -g vtop
 
 # Pip
-hr; echo "Installing python pip"; hr
+hr; echo "\nInstalling python pip\n"; hr
 mkdir -p /tmp/bootstrap/get-pip && cd /tmp/bootstrap/get-pip
 wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
 python get-pip.py
 
 #/usr/local/bin/pip install --upgrade Glances
-hr; echo "Installing Glances"; hr
+hr; echo "\nInstalling Glances\n"; hr
 curl -L http://bit.ly/glances | /bin/bash
 
 cd /
 #curl -L http://bit.ly/glances | /bin/bash
 
-hr; echo "Installing libvirt / KVM"; hr
+hr; echo "\nInstalling libvirt / KVM\n"; hr
 aptitude -y install qemu-kvm libvirt-bin
 
-hr; echo "Installing webmin"; hr
+hr; echo "\nInstalling webmin\n"; hr
 rm -vf /etc/apt/sources.list.d/webmin.list
 
 # Create a new webmin.list
@@ -86,14 +114,14 @@ apt-key add jcameron-key.asc
 aptitude update
 aptitude -y install webmin
 
-# hr; echo "Web terminal"; hr
+# hr; echo "\nWeb terminal\n"; hr
 
-hr; echo "Cleanup apt packages"; hr
+hr; echo "\nCleanup apt packages\n"; hr
 apt-get clean
 apt-get autoclean
 apt-get autoremove
 
-hr; echo "Remove unnecessary locale files"; hr
+hr; echo "\nRemove unnecessary locale files\n"; hr
 rm -rfv /usr/share/man/??
 rm -rfv /usr/share/man/??_*
 
@@ -105,16 +133,16 @@ find /usr/share/locale -maxdepth 1 -mindepth 1 -type d | grep -v -e "en_US" | xa
 # mv /usr/lib/locale/locale-archive /usr/lib/locale/locale-archive.tmpl
 # dpkg-reconfigure locales
 
-hr; echo "Remove ipv6 files"; hr
+hr; echo "\nRemove ipv6 files\n"; hr
 rm -rvf /lib/xtables/libip6t_*
 
-hr; echo "Remove translations"; hr
+hr; echo "\nRemove translations\n"; hr
 # http://oneofmanyworlds.blogspot.se/2012/02/debian-wheezy-removing-unused-locales.html
 
-hr; echo "Disable unneded services"; hr
+hr; echo "\nDisable unneded services\n"; hr
 systemctl stop bluetooth
 systemctl disable bluetooth
 systemctl stop ModemManager
 systemctl disable ModemManager
 
-hr; echo "Reboot for effect"; hr
+hr; echo "\nReboot for effect\n"; hr
