@@ -2,9 +2,11 @@
 
 # Fix locale issues
 update-locale LC_ALL="en_US.UTF-8"
-
-# Temporary fix to avoid logging in
+export LANGUAGE="en_US.UTF-8"
+export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
+locale-gen en_US.UTF-8
+dpkg-reconfigure locales
 
 function confirmContinue () {
   read -r -p "${1:-Are you sure? [y/N]} " response
